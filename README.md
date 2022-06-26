@@ -109,7 +109,7 @@ media_editor/
 1. Download source code
 	- [Windows](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)
 	- [Linux](https://dl.google.com/android/repository/platform-tools-latest-linux.zip)
-2. Move this folder in `resources/` directory in program folder.
+2. Move folder `platform-tools` in `resources/` directory in program folder.
 3. Enable USB debugging on Android device and pair it with your computer [read more in below links]
 
 - [Official ADB website](https://developer.android.com/studio/command-line/adb)
