@@ -58,16 +58,16 @@ in `settings.py` file you can configure program. Options are:
 #### ImageConfig
 
 - `text` - text to be written over each image **[string]**
-- `text_size` - font size of text **[integer]**
 - `text_color` - color of the text **[string]**
 - `text_stroke_fill` - text outline color **[string]**
 - `text_stroke_weight` - text outline size **[integer]**
+- `text_width_fraction` - fraction of text width over image **[float: 0-1]**
 - `text_pos` - text to be written over each image **[tuple (posX, posY)]**
 
 #### VideoConfig
 
 - `text` - text to be written over each video **[string]**
--  `text_pos` - text alignment over video **[top, bottom, left, right]**
+- `text_pos` - text alignment over video **[top, bottom, left, right]**
 - `text_color` - color of the text **[string]**
 - `fps` - processed video fps **[integer]**
 - `threads` - number of threads used for processing **[integer]**
@@ -90,13 +90,7 @@ media_editor/
     ├── music1.mp3
     ├── music2.mp3
     └── ...
-  (on windows)
-  └── adb-windows/
-    ├── adb.exe
-    └── ...
-  (on linux)
-  └── adb-linux/
-    ├── adb
+  └── platform-tools/
     └── ...
 ├── process.py
 ├── editor_image.py
