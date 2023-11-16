@@ -1,129 +1,129 @@
-# Python Media Editor
+# AutoMediaProccesor - Python Automation Project
 
-  Automated productivity tool for Video/Image watermarking and adding music. It automatically transfers media from Android device, processes and pushes processed media back on Android. It adds specified watermark text label over Image/Video and adds music over video. It also compresses videos to 720p if specified. It has configurable properties, such as text label, size, position, color, encoding, fps and etc.
+Automated productivity tool for Video/Image watermarking and adding music. It automatically transfers media from an Android device, processes it, and pushes the processed media back to the device. Features include adding a specified watermark text label over Image/Video, adding music to videos, and optional video compression to 720p. Configurable properties include text label size, position, color, encoding, fps, and more.
 
+## Usage
 
-## usage
+1. On your Android device, move target Images/Videos to a gallery album named **`Transfer`**.
+2. Connect your Android device to your computer using a USB cable.
+3. Run `python3 process.py` and the rest will be handled automatically.
 
-1. In android device, move target Images/Videos to gallery album with the name **`Transfer`**
-2. Connect Android with Computer using USB Cable
-3. Run `python3 process.py` and the rest will be done automatically
-
-all processed Images/Videos will be in newly created album with the name **`Processed`** in Android device.
+All processed Images/Videos will be in a newly created album named **`Processed`** on your Android device.
 
 #### Process (Algorithm)
 
-1. Transfers all media from Android `Transfer` album to `Transfer` directory locally on machine.
-2. Scannimg transfered media and organizing it seperately as Images and Videos.
-3. Processing Images
-	- adds text label (watermark) over each image
-	- each Image is saved in `Processed/` directory locally
-4. Processing Videos 
-	- adds text label (watermark) over each video
-	- select random music from `resources/music/` folder and add it over current video
-	- if `compress` is set to **True**, each video is compressed to 720p (HD) if possible.
-	- each Video is saved in `Processed/` directory locally
-5. Transfering processed media in Android device
-	- all media is transfered in `Transfered` album in android gallery.
-6. Media files are removed locally
-		
-## requirements
-- **python 3**
-- **moviepy** library `pip3 install moviepy`
-- **PIL** library `pip3 install pillow`
+1. Transfers all media from the Android `Transfer` album to a `Transfer` directory locally on the machine.
+2. Scans transferred media and organizes it separately as Images and Videos.
+3. Processes Images:
+   - Adds a text label (watermark) over each image.
+   - Saves each Image in the `Processed/` directory locally.
+4. Processes Videos:
+   - Adds a text label (watermark) over each video.
+   - Selects random music from the `resources/music/` folder and adds it to the video.
+   - Compresses videos to 720p if `compress` is set to **True**.
+   - Saves each Video in the `Processed/` directory locally.
+5. Transfers processed media back to the Android device:
+   - All media is transferred to the `Processed` album in the Android gallery.
+6. Removes media files locally after the transfer.
 
-also listed in `requirements.txt`
+## Requirements
+
+- **Python 3**
+- **MoviePy** library (`pip3 install moviepy`)
+- **PIL (Python Imaging Library)** (`pip3 install pillow`)
+
+Also listed in `requirements.txt`.
 
 #### Other Software
-- **ADB shell** [Android Debug Bridge]
-- **ImageMagick** [Software used by moviepy for adding text over video]
 
-read about installation below
+- **ADB (Android Debug Bridge) Shell** - for transferring media between Android and computer.
+- **ImageMagick** - Used by MoviePy for adding text over videos.
 
+Read about installation below.
 
 ## Installation
 
-1. Clone/Download this repository and extract it on your machine. 
-2. Install **python 3** if not installed on your machine
-3. Install required packages with **pip3** 
-	- `pip3 install -r requirements.txt` **or** `pip3 install pillow moviepy` (on some machines use pip instead of pip3)
-4. Install **ImageMagick** on your machine. [view detailed explanation below]
-5. Download **ADB shell** on your machine. [view detailed explanation below]
+1. Clone/download this repository and extract it on your machine.
+2. Install **Python 3** if not already installed.
+3. Install required packages with **pip3**:
+   - `pip3 install -r requirements.txt` **or** `pip3 install pillow moviepy`
+4. Install **ImageMagick** on your machine. [View detailed explanation below]
+5. Download **ADB shell** on your machine. [View detailed explanation below]
 
-## configuration
+## Configuration
 
-in `settings.py` file you can configure program. Options are:
-
+Configure the program in the `settings.py` file. Options include:
 
 #### ImageConfig
 
-- `text` - text to be written over each image **[string]**
-- `text_color` - color of the text **[string]**
-- `text_stroke_fill` - text outline color **[string]**
-- `text_stroke_weight` - text outline size **[integer]**
-- `text_width_fraction` - fraction of text width over image **[float: 0-1]**
-- `text_pos` - text to be written over each image **[tuple (posX, posY)]**
+- `text` - Text to be written over each image **[string]**
+- `text_color` - Color of the text **[string]**
+- `text_stroke_fill` - Text outline color **[string]**
+- `text_stroke_weight` - Text outline size **[integer]**
+- `text_width_fraction` - Fraction of text width over image **[float: 0-1]**
+- `text_pos` - Position of text over each image **[tuple (posX, posY)]**
 
 #### VideoConfig
 
-- `text` - text to be written over each video **[string]**
-- `text_pos` - text alignment over video **[top, bottom, left, right]**
-- `text_color` - color of the text **[string]**
-- `fps` - processed video fps **[integer]**
-- `threads` - number of threads used for processing **[integer]**
-- `codec` - video codec **[string]**
-- `compress` - compresses video to 720p if True **[boolean True/False]**
+- `text` - Text to be written over each video **[string]**
+- `text_pos` - Text alignment over video **[top, bottom, left, right]**
+- `text_color` - Color of the text **[string]**
+- `fps` - Processed video fps **[integer]**
+- `threads` - Number of threads used for processing **[integer]**
+- `codec` - Video codec **[string]**
+- `compress` - Compresses video to 720p if True **[boolean True/False]**
 
 #### Paths
 
-Paths will be automatically configured if you follow default conventions [view below]. For more advanced configuration view `settings.py` Paths class.
-
+Paths are automatically configured if you follow default conventions. For advanced configuration, view `settings.py` Paths class.
 
 ## Default Conventions
-It is recommended to store all program components as shown below. For advanced usage, you can change this, but then you have to configure Paths in `settings.py`
+
+It's recommended to store all program components as shown below. For advanced usage, you can change this, but then you have to configure Paths in `settings.py`.
 
 ```
 media_editor/
 ├── resources/
-  ├── font.ttf
-  ├── music/
-    ├── music1.mp3
-    ├── music2.mp3
-    └── ...
-  └── platform-tools/
-    └── ...
+│   ├── font.ttf
+│   ├── music/
+│   │   ├── music1.mp3
+│   │   ├── music2.mp3
+│   │   └── ...
+│   └── platform-tools/
+│       └── ...
 ├── process.py
 ├── editor_image.py
 ├── editor_video.py
-├── media.transfer.py
+├── media_transfer.py
 ├── helpers.py
 ├── settings.py
 └── requirements.txt
-
 ```
 
-## ADB shell Download Guide
+## ADB Shell Download Guide
 
-**ADB** (Android Debug Bridge) is software developed by Google for accessing Android using USB debugging. In this case, it is used to transfer media from android to machine and vice versa.
+**ADB (Android Debug Bridge)** is a tool developed by Google for interfacing with Android devices via USB debugging. It's used
 
-1. Download source code
-	- [Windows](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)
-	- [Linux](https://dl.google.com/android/repository/platform-tools-latest-linux.zip)
-2. Move folder `platform-tools` in `resources/` directory in program folder.
-3. Enable USB debugging on Android device and pair it with your computer [read more in below links]
+ here for transferring media between Android devices and computers.
 
-- [Official ADB website](https://developer.android.com/studio/command-line/adb)
-- [Read more detailed install guide](https://www.xda-developers.com/install-adb-windows-macos-linux/)
+1. Download the source code:
+   - [Windows](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)
+   - [Linux](https://dl.google.com/android/repository/platform-tools-latest-linux.zip)
+2. Move the `platform-tools` folder to the `resources/` directory in the program folder.
+3. Enable USB debugging on your Android device and pair it with your computer. 
+   - [Official ADB website](https://developer.android.com/studio/command-line/adb)
+   - [Detailed install guide](https://www.xda-developers.com/install-adb-windows-macos-linux/)
 
 ## ImageMagick Installation
 
-**ImageMagick** is video editing software. In this program it is used by python `moviepy` video editing library for writing text watermark over videos.
+**ImageMagick** is a video editing tool used by the Python `moviepy` library for adding text watermarks over videos.
 
-#### WIndows
+#### Windows
 
-1. Download [installer](https://imagemagick.org/archive/binaries/ImageMagick-7.1.0-39-Q16-HDRI-x64-dll.exe) 
-2. Follow instructions and install
-3. in `settings.py`, set `IMAGEMAGICK_BINARY` variable with magick.exe executable path. By default, it should be `C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe` (this path is already set as value).
+1. Download the [installer](https://imagemagick.org/archive/binaries/ImageMagick-7.1.0-39-Q16-HDRI-x64-dll.exe).
+2. Follow the installation instructions.
+3. In `settings.py`, set the `IMAGEMAGICK_BINARY` variable to the path of `magick.exe`. By default, it should be `C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe`.
 
 #### Linux
-- for linux, read installation guide on official [website](https://imagemagick.org/script/download.php)
+
+- For Linux, refer to the installation guide on the official [ImageMagick website](https://imagemagick.org/script/download.php).
